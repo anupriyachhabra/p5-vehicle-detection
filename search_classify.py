@@ -1,14 +1,16 @@
 import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 import glob
 import time
+import pickle
 from sklearn.svm import LinearSVC
 from sklearn.preprocessing import StandardScaler
 from skimage.feature import hog
 from lesson_functions import *
 from sklearn.model_selection import train_test_split
+from moviepy.editor import VideoFileClip
+
 
 # Define a function to extract features from a single image window
 # This function is very similar to extract_features()
@@ -91,6 +93,33 @@ def search_windows(img, windows, clf, scaler, color_space='RGB',
     #8) Return windows for positive detections
     return on_windows
 
+def pipeline(image):
+
+    calibration_data = pickle.load( open( "calibration_data.p", "rb" ) )
+    mtx = calibration_data["mtx"]
+    dist = calibration_data["dist"]
+
+    dst = cv2.undistort(image, mtx, dist, None, mtx)
+
+    draw_image = np.copy(image)
+    # Uncomment the following line if you extracted training
+    #  data from .png images (scaled 0 to 1 by mpimg) and the
+    #  image you are searching is a .jpg (scaled 0 to 255)
+    image = dst.astype(np.float32)/255
+
+    windows = slide_window(image, x_start_stop=[None, None], y_start_stop=y_start_stop,
+                           xy_window=(96, 96), xy_overlap=(0.5, 0.5))
+
+    hot_windows = search_windows(image, windows, svc, X_scaler, color_space=color_space,
+                        spatial_size=spatial_size, hist_bins=hist_bins,
+                        orient=orient, pix_per_cell=pix_per_cell,
+                        cell_per_block=cell_per_block,
+                        hog_channel=hog_channel, spatial_feat=spatial_feat,
+                        hist_feat=hist_feat, hog_feat=hog_feat)
+
+    window_img = draw_boxes(draw_image, hot_windows, color=(0, 0, 255), thick=6)
+    return window_img
+
 
 # Read in cars and notcars
 car_images = glob.iglob('../vehicles/**/*.png', recursive=True)
@@ -109,18 +138,19 @@ print ("not cars size", len(notcars))
 
 
 ### TODO: Tweak these parameters and see how the results change.
-color_space = 'HSV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
+color_space = 'HLS' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
 orient = 7  # HOG orientations
 pix_per_cell = 16 # HOG pixels per cell
 cell_per_block = 4 # HOG cells per block
-hog_channel = 'ALL' # Can be 0, 1, 2, or "ALL"
+#change this to only search on one channel
+hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"
 spatial_size = (16, 16) # Spatial binning dimensions
 hist_bins = 64    # Number of histogram bins
 spatial_feat = True # Spatial features on or off
-hist_feat = False # Histogram features on or off
+hist_feat = True # Histogram features on or off
 hog_feat = True # HOG features on or off
-y_start_stop = [360, 670] # Min and max in y to search in slide_window()
-#do distortion correction
+y_start_stop = [300, 600] # Min and max in y to search in slide_window()
+
 
 car_features = extract_features(cars, color_space=color_space,
                         spatial_size=spatial_size, hist_bins=hist_bins,
@@ -170,24 +200,20 @@ images = glob.glob('test_images/*')
 for fname in images:
     image_name = fname.split('/')[1]
     image = mpimg.imread(fname)
-    draw_image = np.copy(image)
+    mpimg.imsave('output_images/'+image_name, pipeline(image));
 
-    # Uncomment the following line if you extracted training
-    #  data from .png images (scaled 0 to 1 by mpimg) and the
-    #  image you are searching is a .jpg (scaled 0 to 255)
-    image = image.astype(np.float32)/255
 
-    windows = slide_window(image, x_start_stop=[None, None], y_start_stop=y_start_stop,
-                    xy_window=(96, 96), xy_overlap=(0.5, 0.5))
+project_video_output = 'test_video_output.mp4'
+clip = VideoFileClip("test_video.mp4")
 
-    hot_windows = search_windows(image, windows, svc, X_scaler, color_space=color_space,
-                        spatial_size=spatial_size, hist_bins=hist_bins,
-                        orient=orient, pix_per_cell=pix_per_cell,
-                        cell_per_block=cell_per_block,
-                        hog_channel=hog_channel, spatial_feat=spatial_feat,
-                        hist_feat=hist_feat, hog_feat=hog_feat)
+project_video_clip = clip.fl_image(pipeline)
+project_video_clip.write_videofile(project_video_output, audio=False)
 
-    window_img = draw_boxes(draw_image, hot_windows, color=(0, 0, 255), thick=6)
-    mpimg.imsave('output_images/'+image_name, window_img);
+
+project_video_output = 'project_video_output.mp4'
+clip = VideoFileClip("project_video.mp4")
+
+project_video_clip = clip.fl_image(pipeline)
+project_video_clip.write_videofile(project_video_output, audio=False)
 
 
