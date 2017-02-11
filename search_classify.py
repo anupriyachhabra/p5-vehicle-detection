@@ -117,9 +117,10 @@ hog_channel = 'ALL' # Can be 0, 1, 2, or "ALL"
 spatial_size = (16, 16) # Spatial binning dimensions
 hist_bins = 64    # Number of histogram bins
 spatial_feat = True # Spatial features on or off
-hist_feat = True # Histogram features on or off
+hist_feat = False # Histogram features on or off
 hog_feat = True # HOG features on or off
-y_start_stop = [360, None] # Min and max in y to search in slide_window()
+y_start_stop = [360, 670] # Min and max in y to search in slide_window()
+#do distortion correction
 
 car_features = extract_features(cars, color_space=color_space,
                         spatial_size=spatial_size, hist_bins=hist_bins,
