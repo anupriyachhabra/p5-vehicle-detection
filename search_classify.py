@@ -144,8 +144,8 @@ pix_per_cell = 16 # HOG pixels per cell
 cell_per_block = 4 # HOG cells per block
 #change this to only search on one channel
 hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"
-spatial_size = (16, 16) # Spatial binning dimensions
-hist_bins = 64    # Number of histogram bins
+spatial_size = (64, 64) # Spatial binning dimensions
+hist_bins = 32    # Number of histogram bins
 spatial_feat = True # Spatial features on or off
 hist_feat = True # Histogram features on or off
 hog_feat = True # HOG features on or off
@@ -215,5 +215,7 @@ clip = VideoFileClip("project_video.mp4")
 
 project_video_clip = clip.fl_image(pipeline)
 project_video_clip.write_videofile(project_video_output, audio=False)
+
+# try with only s channel
 
 
