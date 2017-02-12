@@ -10,6 +10,7 @@ from skimage.feature import hog
 from lesson_functions import *
 from sklearn.model_selection import train_test_split
 from moviepy.editor import VideoFileClip
+from scipy.ndimage.measurements import label
 
 
 # Define a function to extract features from a single image window
@@ -93,22 +94,56 @@ def search_windows(img, windows, clf, scaler, color_space='RGB',
     #8) Return windows for positive detections
     return on_windows
 
-def pipeline(image):
 
-    calibration_data = pickle.load( open( "calibration_data.p", "rb" ) )
-    mtx = calibration_data["mtx"]
-    dist = calibration_data["dist"]
+def add_heat(heatmap, bbox_list):
+    for box in bbox_list:
+        #Add += 1 for all pixels inside each bbox
+        # Assuming each "box" takes the form ((x1, y1), (x2, y2))
+        heatmap[box[0][1]:box[1][1], box[0][0]:box[1][0]] += 1
+    return heatmap
 
-    dst = cv2.undistort(image, mtx, dist, None, mtx)
+def apply_threshold(heatmap, threshold):
+    #Zero out pixels below the threshold
+    heatmap[heatmap <= threshold] = 0
+    # Return thresholded map
+    return heatmap
+
+
+def draw_labeled_bboxes(img, labels):
+    #Iterate through all detected cars
+    for car_number in range(1, labels[1]+1):
+        #Find pixels with each car_number label value
+        nonzero = (labels[0] == car_number).nonzero()
+        # Identify x and y values of those pixels
+        nonzeroy = np.array(nonzero[0])
+        nonzerox = np.array(nonzero[1])
+        # Define a bounding box based on min/max x and y
+        bbox = ((np.min(nonzerox), np.min(nonzeroy)), (np.max(nonzerox), np.max(nonzeroy)))
+        # Draw the box on the image
+
+        # ignore bounded boxes for cars detected in opposite direction
+        if np.min(nonzerox) > 350 :
+            cv2.rectangle(img, bbox[0], bbox[1], (0,0,255), 6)
+        #Return the image
+    return img
+
+
+def pipeline(image, image_name = ''):
+
+    #calibration_data = pickle.load( open( "calibration_data.p", "rb" ) )
+    #mtx = calibration_data["mtx"]
+    #dist = calibration_data["dist"]
+
+    #dst = cv2.undistort(image, mtx, dist, None, mtx)
 
     draw_image = np.copy(image)
     # Uncomment the following line if you extracted training
     #  data from .png images (scaled 0 to 1 by mpimg) and the
     #  image you are searching is a .jpg (scaled 0 to 255)
-    image = dst.astype(np.float32)/255
+    image = image.astype(np.float32)/255
 
     windows = slide_window(image, x_start_stop=[None, None], y_start_stop=y_start_stop,
-                           xy_window=(96, 96), xy_overlap=(0.5, 0.5))
+                           xy_window=(96, 96), xy_overlap=(0.7, 0.7))
 
     hot_windows = search_windows(image, windows, svc, X_scaler, color_space=color_space,
                         spatial_size=spatial_size, hist_bins=hist_bins,
@@ -118,7 +153,21 @@ def pipeline(image):
                         hist_feat=hist_feat, hog_feat=hog_feat)
 
     window_img = draw_boxes(draw_image, hot_windows, color=(0, 0, 255), thick=6)
-    return window_img
+    mpimg.imsave('output_images/first_pass/'+image_name, window_img)
+
+    #Adding heat to windows
+    heatmap = np.zeros_like(image[:,:,0]).astype(np.float)
+    heatmap = add_heat(heatmap, hot_windows)
+
+    #threshold
+    heatmap = apply_threshold(heatmap, 2)
+    labels = label(heatmap)
+
+    mpimg.imsave('output_images/heat_map/'+image_name, labels[0], cmap='gray')
+
+    labeled_image = draw_labeled_bboxes(draw_image, labels)
+
+    return labeled_image
 
 
 # Read in cars and notcars
@@ -200,7 +249,7 @@ images = glob.glob('test_images/*')
 for fname in images:
     image_name = fname.split('/')[1]
     image = mpimg.imread(fname)
-    mpimg.imsave('output_images/'+image_name, pipeline(image));
+    mpimg.imsave('output_images/final_output/'+image_name, pipeline(image, image_name))
 
 
 project_video_output = 'test_video_output.mp4'
@@ -217,5 +266,11 @@ project_video_clip = clip.fl_image(pipeline)
 project_video_clip.write_videofile(project_video_output, audio=False)
 
 # try with only s channel
+#remove distortion correction
+# first tried with large number of histogram features =64
+# increased overlap area to 70% for higher confidence
+#y_start increaed to360 and stop decreaed to 600 to remove false positives
+#ignore bounded boxes for cars detected in opposite direction
+#Put condition on max y as well for drawing bounding boxes
 
 
