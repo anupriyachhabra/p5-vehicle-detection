@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d991a98-663a-483a-8e1d-d6f87ee761a2" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test_output.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/final_output/test1.jpg" afterPath="$PROJECT_DIR$/output_images/final_output/test1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/final_output/test4.jpg" afterPath="$PROJECT_DIR$/output_images/final_output/test4.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/final_output/test5.jpg" afterPath="$PROJECT_DIR$/output_images/final_output/test5.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/final_output/test6.jpg" afterPath="$PROJECT_DIR$/output_images/final_output/test6.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/first_pass/.png" afterPath="$PROJECT_DIR$/output_images/first_pass/.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/first_pass/test1.jpg" afterPath="$PROJECT_DIR$/output_images/first_pass/test1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/first_pass/test2.jpg" afterPath="$PROJECT_DIR$/output_images/first_pass/test2.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/first_pass/test3.jpg" afterPath="$PROJECT_DIR$/output_images/first_pass/test3.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/first_pass/test4.jpg" afterPath="$PROJECT_DIR$/output_images/first_pass/test4.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/first_pass/test5.jpg" afterPath="$PROJECT_DIR$/output_images/first_pass/test5.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/first_pass/test6.jpg" afterPath="$PROJECT_DIR$/output_images/first_pass/test6.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/heat_map/.png" afterPath="$PROJECT_DIR$/output_images/heat_map/.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/heat_map/test1.jpg" afterPath="$PROJECT_DIR$/output_images/heat_map/test1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/heat_map/test4.jpg" afterPath="$PROJECT_DIR$/output_images/heat_map/test4.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/heat_map/test5.jpg" afterPath="$PROJECT_DIR$/output_images/heat_map/test5.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output_images/heat_map/test6.jpg" afterPath="$PROJECT_DIR$/output_images/heat_map/test6.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project_video_output.mp4" afterPath="$PROJECT_DIR$/project_video_output.mp4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_video_output.mp4" afterPath="$PROJECT_DIR$/test_video_output.mp4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lesson_functions.py" afterPath="$PROJECT_DIR$/lesson_functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search_classify.py" afterPath="$PROJECT_DIR$/search_classify.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
     </list>
     <ignored path="CarND-Vehicle-Detection.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,11 +36,9 @@
       <file leaf-file-name="search_classify.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/search_classify.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-445">
-              <caret line="118" column="27" selection-start-line="118" selection-start-column="19" selection-end-line="118" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="7" column="48" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -81,9 +56,9 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="SECOND">
-              <first_editor relative-caret-position="238">
-                <caret line="135" column="59" selection-start-line="135" selection-start-column="59" selection-end-line="135" selection-end-column="59" />
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="534">
+                <caret line="75" column="74" selection-start-line="75" selection-start-column="74" selection-end-line="75" selection-end-column="74" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -346,7 +321,7 @@
     <frame x="0" y="23" width="1440" height="815" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17758985" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17758985" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -401,9 +376,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1751">
           <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -450,9 +423,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -492,26 +463,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lesson_functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="99" column="4" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/search_classify.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-445">
-          <caret line="118" column="27" selection-start-line="118" selection-start-column="19" selection-end-line="118" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -522,11 +473,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lesson_functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="99" column="4" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Python/2.7/site-packages/sklearn/preprocessing/data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="520" column="8" selection-start-line="520" selection-start-column="8" selection-end-line="520" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search_classify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SECOND">
-          <first_editor relative-caret-position="238">
-            <caret line="135" column="59" selection-start-line="135" selection-start-column="59" selection-end-line="135" selection-end-column="59" />
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="534">
+            <caret line="75" column="74" selection-start-line="75" selection-start-column="74" selection-end-line="75" selection-end-column="74" />
             <folding />
           </first_editor>
           <second_editor />

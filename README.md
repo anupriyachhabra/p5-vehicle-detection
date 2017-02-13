@@ -72,6 +72,9 @@ and split them into a training and test set using `sklearn.model_selection` `tra
 classifier using `LinearSVC.fit` method and then cross verified my results using `LinearSVC.score` method. I managed to get 94%
 accuracy. The code for this is in line 231 to 249 of file `search_classify.py`
 
+Also I have normalized the non-cars and cars features to zero mean and unit variance using `StandardScaler` method from `sklearn.preprocessing`.
+The code for this normalization is in line 221-225 of `search_classify.py`
+
 I then used all the hog channels for my image in `HLS` space and that improved the accuracy to 97% so I changed my code in hog to use
 `ALL` color channels
 
@@ -108,6 +111,7 @@ detect more positives in the sides of the images.
 cars in opposite direction.
 - I have changed the y_start and y_stop to not include the portion of image too close to horizon and too close to the car. This helped me to
 get rid of lots of false positives like trees and road signs.
+- Finally I have used a thresholded heatmap method and removed any detection which have less than `4` overlapping boxes.
 
 Following is an example of the final output of my pipeline.
 ![final output test1.jpg][image6]
@@ -121,10 +125,10 @@ Here's a [link to my video result](./project_video_output.mp4)
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a
-heatmap and then thresholded that map to identify vehicle positions. I then used `scipy.ndimage.measurements.label()` to identify
-individual blobs in the heatmap. I then assumed each blob corresponded to a vehicle.
-I constructed bounding boxes to cover the area of each blob detected. Also when drawing the bounding boxes over my image I
+- I recorded the positions of positive detections in each frame of the video.
+- From the positive detections I created a heatmap and then thresholded that map to `4` overlapping boxes to identify vehicle positions.
+- I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap. I then assumed each blob corresponded
+to a vehicle.I constructed bounding boxes to cover the area of each blob detected. Also when drawing the bounding boxes over my image I
 have ignored the bounding boxes where minimum value of x is too small as that detects cars in opposite direction.
 
 The code for implementing above is in line 97 to 127 of file `search_classify.py` and is called from function `pipeline` of same file.
