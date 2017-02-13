@@ -6,7 +6,6 @@ import time
 import pickle
 from sklearn.svm import LinearSVC
 from sklearn.preprocessing import StandardScaler
-from skimage.feature import hog
 from lesson_functions import *
 from sklearn.model_selection import train_test_split
 from moviepy.editor import VideoFileClip
@@ -122,7 +121,7 @@ def draw_labeled_bboxes(img, labels):
         # Draw the box on the image
 
         # ignore bounded boxes for cars detected in opposite direction
-        if np.min(nonzerox) > 350 :
+        if np.min(nonzerox) > img.shape[1]/2 :
             cv2.rectangle(img, bbox[0], bbox[1], (0,0,255), 6)
         #Return the image
     return img
@@ -130,20 +129,25 @@ def draw_labeled_bboxes(img, labels):
 
 def pipeline(image, image_name = ''):
 
-    #calibration_data = pickle.load( open( "calibration_data.p", "rb" ) )
-    #mtx = calibration_data["mtx"]
-    #dist = calibration_data["dist"]
+    calibration_data = pickle.load( open( "calibration_data.p", "rb" ) )
+    mtx = calibration_data["mtx"]
+    dist = calibration_data["dist"]
 
-    #dst = cv2.undistort(image, mtx, dist, None, mtx)
+    dst = cv2.undistort(image, mtx, dist, None, mtx)
 
     draw_image = np.copy(image)
     # Uncomment the following line if you extracted training
     #  data from .png images (scaled 0 to 1 by mpimg) and the
     #  image you are searching is a .jpg (scaled 0 to 255)
-    image = image.astype(np.float32)/255
+    image = dst.astype(np.float32)/255
 
     windows = slide_window(image, x_start_stop=[None, None], y_start_stop=y_start_stop,
                            xy_window=(96, 96), xy_overlap=(0.7, 0.7))
+
+    windows2 = slide_window(image, x_start_stop=[None, None], y_start_stop=y_start_stop,
+                           xy_window=(48, 48), xy_overlap=(0.5, 0.5))
+
+    windows.extend(windows2)
 
     hot_windows = search_windows(image, windows, svc, X_scaler, color_space=color_space,
                         spatial_size=spatial_size, hist_bins=hist_bins,
@@ -160,7 +164,7 @@ def pipeline(image, image_name = ''):
     heatmap = add_heat(heatmap, hot_windows)
 
     #threshold
-    heatmap = apply_threshold(heatmap, 2)
+    heatmap = apply_threshold(heatmap, 4)
     labels = label(heatmap)
 
     mpimg.imsave('output_images/heat_map/'+image_name, labels[0], cmap='gray')
