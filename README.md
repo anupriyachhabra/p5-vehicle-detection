@@ -159,3 +159,7 @@ better way.
 robust so that it works on any image size.
 
 
+### Reviewer's comments
+I have included the comments I got for this project from Udacity's reviewer [here](./ProjectReview.pdf)
+
+
